@@ -5,8 +5,7 @@
 - [Agregar una imagen o fotografía relevante al proyecto "SIN DEFINIR]
   
 
-Este proyecto se realiza durante el curso **Laboratorio STEAM+** de la
-tecnicatura **Redes y Software** del [**nombre del instituto**] de **UTU**.
+Este proyecto se realiza durante el curso Laboratorio STEAM+, correspondiente a la tecnicatura Redes y Software del Instituto Tecnológico de Informática de UTU.
 
 ## Integrantes
 - Rafael Nunes
@@ -20,7 +19,7 @@ Primer avance
 
 La documentación correspondiente al primer avance del proyecto reúne el trabajo realizado durante las diferentes clases, incluyendo los avances en el desarrollo, las pruebas realizadas y la evolución del código.
 
-- [AVANCE DE AGOSTO - PROYECTO.pdf](documentacion/AVANCE%20DE%20AGOSTO%20-%20PROYECTO.pdf)
+- [PROYECTO STEAM - AGOSTO.pdf](documentacion/PROYECTO%20STEAM%20-%20AGOSTO.pdf)
 
 
 ## Código fuente
