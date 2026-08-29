@@ -16,15 +16,16 @@ tecnicatura **Redes y Software** del [**nombre del instituto**] de **UTU**.
 
 
 ## Documentación
--Primer avance
+Primer avance
 
 La documentación correspondiente al primer avance del proyecto reúne el trabajo realizado durante las diferentes clases, incluyendo los avances en el desarrollo, las pruebas realizadas y la evolución del código.
 
-- [PROYECTO STEAM.pdf](documentacion/PROYECTO%20STEAM.pdf)
+- [AVANCE DE AGOSTO - PROYECTO.pdf](documentacion/AVANCE%20DE%20AGOSTO%20-%20PROYECTO.pdf)
 
 
 ## Código fuente
-- [Agregar enlace a la carpeta de GitHub donde se haya guardado el código fuente]
+Durante el desarrollo del proyecto se realizaron diferentes versiones del código, que se encuentran disponibles en este repositorio:
+
 - [Ejemplo: `codigo/programa1.py`]
 
 ## Presentación Final
