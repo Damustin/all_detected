@@ -3,7 +3,7 @@
 ### Sistema inteligente de detección de movimiento y alertas mediante micro:bit y sensores, pensado para el monitoreo y seguridad de espacios, con posibilidad de incorporar nuevas funcionalidades en el futuro.
 
 
-![Imagen del proyecto](./imagen-proyecto.png)
+![Imagen del proyecto](imagenes/Imagen_representativa_proyecto.png)
 
 Este proyecto se realiza durante el curso **Laboratorio STEAM+**, correspondiente a la tecnicatura **Redes y Software** del Instituto Tecnológico de Informática de UTU.
 
@@ -121,7 +121,7 @@ El funcionamiento general planteado es:
 
 **Sensor PIR detecta movimiento → la micro:bit procesa la detección → se envía una señal mediante radio → la segunda micro:bit recibe la señal → se activa una alerta.**
 
-![Imagen del proyecto](./imagen-proyecto.png)
+![Imagen del proyecto](imagenes/Diagrama%20de%20funcionamiento.png)
 
 ---
 
