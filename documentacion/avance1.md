@@ -48,7 +48,7 @@ También se comenzó a organizar el proyecto mediante **GitHub**, creando y conf
 
 ### Pruebas y simulaciones
 
-![Imagen del proyecto](./imagen-proyecto.png)
+![Imagen del proyecto](imagenes/Imagen_thinkercad1.png)
 
 La simulación permite visualizar una primera aproximación a la distribución y conexión de los componentes que formarán parte del sistema.
 
