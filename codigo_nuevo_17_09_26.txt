@@ -1,0 +1,69 @@
+radio.set_group(20)
+radio.set_transmit_power(7)
+
+PIR = DigitalPin.P0
+
+
+def screen_alert():
+    basic.show_icon(IconNames.ANGRY)
+    basic.show_string("ALERT")
+    
+def sound_alert():
+    pins.analog_set_pitch_pin(AnalogPin.P1)
+
+    pins.analog_pitch(220, 200)
+    basic.pause(1000)
+    pins.analog_pitch(440, 200)
+    basic.pause(1000)
+    pins.analog_pitch(880, 200)
+    basic.pause(1000)
+    
+    """music.play_tone(523, music.beat(4))
+   	music.play_tone(523, music.beat(4))
+   	music.play_tone(523, music.beat(4))
+   	music.play_tone(784, music.beat(4))
+
+   	music.play_tone(523, music.beat(4))
+   	music.play_tone(523, music.beat(4))
+   	music.play_tone(523, music.beat(4))
+   	music.play_tone(784, music.beat(4))"""  
+    
+
+
+def send_alert():
+    radio.send_string("alert")
+
+
+def on_received_string(mensaje):
+    if mensaje == "alert":
+        
+        screen_alert()
+        sound_alert()
+
+
+radio.on_received_string(on_received_string)
+
+movimiento_anterior = 0
+
+def on_forever():
+  global movimiento_anterior
+  
+  movimiento = pins.digital_read_pin(PIR)
+  
+  if movimiento == 1 and movimiento_anterior == 0:
+      
+        screen_alert()
+        send_alert()
+        sound_alert()
+        
+        
+        movimiento_anterior = movimiento
+        
+        basic.pause(100)
+        
+    
+     
+      
+        
+
+basic.forever(on_forever)
