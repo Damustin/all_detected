@@ -20,6 +20,10 @@ A partir de esta comunicación, se analizó la posibilidad de utilizar la comput
 
 También se consideró el uso de **Bluetooth** y otras alternativas de comunicación entre la computadora y los teléfonos, con el objetivo de determinar qué método resulta más adecuado para implementar el envío de las alertas.
 
+<p align="center">
+  <img src="imagenes/alerta_proyecto_microbit.png" alt="Sistema de alerta del proyecto micro:bit" width="800">
+</p>
+
 Hasta el momento, **no se han podido realizar correctamente todas las pruebas previstas**, debido a que uno de los integrantes del equipo sufrió el **robo de parte de los materiales utilizados para el proyecto**. Esta situación afectó temporalmente el desarrollo de las pruebas y generó la necesidad de reorganizar el trabajo para poder continuar con el proyecto.
 
 A pesar de esta dificultad, se continuó avanzando en el desarrollo y planificación del sistema, buscando alternativas que permitan retomar las pruebas y continuar con las siguientes etapas del proyecto.
