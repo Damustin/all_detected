@@ -10,6 +10,21 @@ Como resultado de esta clase, se mejoró la organización del repositorio, se in
 
 ---
 
+## 17/09/2026 — Quinta clase
+
+Durante esta clase se continuó avanzando en el desarrollo del sistema de alarma. En primer lugar, se realizaron **correcciones en el código** desarrollado anteriormente y se incorporó un **nuevo sonido para la alarma**, mejorando el funcionamiento de la alerta.
+
+Luego se comenzó a trabajar en la **comunicación serial entre la micro:bit y la computadora**. Se planteó conectar uno de los dispositivos directamente a la laptop y utilizar **PySerial** para permitir que la computadora pueda recibir y procesar los mensajes enviados por la micro:bit.
+
+A partir de esta comunicación, se analizó la posibilidad de utilizar la computadora como intermediaria para tomar decisiones cuando se detecte una situación de alerta. La idea es que, al recibir el mensaje proveniente de la micro:bit, la laptop pueda generar automáticamente una **notificación hacia un teléfono**, utilizando algún medio de comunicación como correo electrónico, WhatsApp o Telegram.
+
+También se consideró el uso de **Bluetooth** y otras alternativas de comunicación entre la computadora y los teléfonos, con el objetivo de determinar qué método resulta más adecuado para implementar el envío de las alertas.
+
+Hasta el momento, **no se han podido realizar correctamente todas las pruebas previstas**, debido a que uno de los integrantes del equipo sufrió el **robo de parte de los materiales utilizados para el proyecto**. Esta situación afectó temporalmente el desarrollo de las pruebas y generó la necesidad de reorganizar el trabajo para poder continuar con el proyecto.
+
+A pesar de esta dificultad, se continuó avanzando en el desarrollo y planificación del sistema, buscando alternativas que permitan retomar las pruebas y continuar con las siguientes etapas del proyecto.
+
+---
 
 
 
@@ -24,31 +39,3 @@ Como resultado de esta clase, se mejoró la organización del repositorio, se in
 
 
 
-
-
-## [x]/9/202x
-- [Realizar una descripción de los avances en el proyecto en la fecha en uno o dos párrafos]
-- [Incluir:]
-  - [Tareas completadas]
-  - [Problemas encontrados y soluciones/alternativas propuestas]
-  - [Próximos pasos]
-  - [Imágenes o videos ilustrativos del avance]
-
-## [x]/9/202x
-- [Realizar una descripción de los avances en el proyecto en la fecha en uno o dos párrafos]
-- [Incluir:]
-  - [Tareas completadas]
-  - [Problemas encontrados y soluciones/alternativas propuestas]
-  - [Próximos pasos]
-  - [Imágenes o videos ilustrativos del avance]
-
-## [x]/9/202x
-- [Realizar una descripción de los avances en el proyecto en la fecha en uno o dos párrafos]
-- [Incluir:]
-  - [Tareas completadas]
-  - [Problemas encontrados y soluciones/alternativas propuestas]
-  - [Próximos pasos]
-  - [Imágenes o videos ilustrativos del avance]
-
-## Nota
-En este enlace encontrarás un [ejemplo como debe completarse el informe de avance](avance_ejemplo.md).
