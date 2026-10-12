@@ -18,7 +18,7 @@ Este proyecto se realiza durante el curso **Laboratorio STEAM+**, correspondient
 
 ## Informe de Avance 1 — Agosto 2026
 
-### 13/08/2026 — Primera clase
+### 13/08/2026 — Definición del proyecto
 
 Durante la primera clase se compartieron diferentes ideas para definir el proyecto a desarrollar. Luego de analizar las propuestas, se llegó al acuerdo de realizar un sistema de detección de movimiento utilizando **dos micro:bit y dos sensores PIR**.
 
@@ -38,7 +38,7 @@ Las maquetas permitirán realizar una demostración visual del funcionamiento de
 
 ---
 
-## 20/08/2026 — Segunda clase
+## 20/08/2026 — Simulaciones iniciales y organización del repositorio
 
 Durante la segunda clase se comenzó a trabajar con **Tinkercad** para realizar pruebas y analizar posibles conexiones entre los componentes. Esta etapa permitió visualizar cómo podrían conectarse los diferentes elementos del proyecto y detectar qué materiales y conexiones serán necesarios para realizar el montaje físico.
 
@@ -139,7 +139,7 @@ Como alternativa inicial, se decidió comenzar realizando simulaciones y pruebas
 
 ---
 
-## 27/08/2026 — Tercera clase
+## 27/08/2026 — Desarrollo del código y comunicación por radio
 
 Durante esta clase se continuó trabajando sobre el código realizado en la clase anterior, buscando mejorar su funcionamiento y avanzar en la comunicación entre las dos micro:bit.
 
