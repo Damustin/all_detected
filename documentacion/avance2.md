@@ -1,4 +1,4 @@
-## 03/09/2026 — Cuarta clase
+## 03/09/2026 — Desarrollo y documentación del proyecto
 
 Durante esta clase se continuó trabajando con **GitHub**, realizando una mejor integración con **Visual Studio Code**. El profesor explicó y mostró cómo utilizar ambas herramientas de una manera más organizada, facilitando la edición, actualización y gestión de los archivos del proyecto dentro del repositorio.
 
@@ -10,7 +10,7 @@ Como resultado de esta clase, se mejoró la organización del repositorio, se in
 
 ---
 
-## 17/09/2026 — Quinta clase
+## 17/09/2026 — Programación y comunicación del sistema de alarma
 
 Durante esta clase se continuó avanzando en el desarrollo del sistema de alarma. En primer lugar, se realizaron **correcciones en el código** desarrollado anteriormente y se incorporó un **nuevo sonido para la alarma**, mejorando el funcionamiento de la alerta.
 
