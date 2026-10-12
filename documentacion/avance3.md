@@ -15,6 +15,8 @@ Trabajamos con dos micro:bit, placas de expansión, sensores PIR, cables de cone
 
 De esta manera, pudimos retomar las pruebas físicas del sistema de alarma.
 
+![Montaje de los componentes](imagenes/Montaje_componentes.jpeg)
+
 ### Montaje y conexiones físicas
 
 Comenzamos conectando los sensores PIR a las placas de expansión de las micro:bit mediante cables de conexión.
@@ -33,6 +35,8 @@ Por su parte, los pines VCC y GND permiten alimentar el sensor.
 
 Una vez realizadas las conexiones, comenzamos las pruebas para comprobar si los sensores detectaban movimiento y si la micro:bit respondía mediante una alerta visual y sonora.
 
+![Conexión del sensor PIR a la placa de expansión](imagenes/Conexion_sensor_PIR.jpeg)
+
 ### Objetivo de las pruebas
 
 Nuestro objetivo principal era conseguir que los sensores PIR detectaran movimiento y que la micro:bit activara una alarma sonora.
@@ -47,7 +51,7 @@ Durante las primeras etapas del proyecto realizamos simulaciones en Tinkercad, u
 
 En aquella versión, el código utilizaba el pin P1 como salida de sonido para el piezoeléctrico.
 
-Posteriormente decidimos retirar ese componente y aprovechar el parlante integrado de la micro:bit V2.
+Posteriormente decidimos retirar ese componente y aprovechar el parlante integrado de la micro:bit.
 
 De esta manera, simplificamos el montaje físico, evitando la necesidad de conectar un dispositivo adicional para reproducir los sonidos.
 
@@ -112,16 +116,15 @@ Nuestro objetivo durante esta etapa era comprobar únicamente la detección de m
 
 ### Adaptación al parlante integrado de la micro:bit
 
-Al comenzar a trabajar con los componentes físicos, decidimos utilizar el parlante integrado de la micro:bit V2 en lugar del piezoeléctrico.
+Al comenzar a trabajar con los componentes físicos, decidimos utilizar el parlante integrado de la micro:bit en lugar del piezoeléctrico previsto inicialmente.
 
-Para esta adaptación podemos utilizar las funciones de música de MakeCode, sin necesidad de conectar un dispositivo de sonido externo.
+Para esta adaptación trabajamos con las funciones de música de MakeCode, que permiten generar sonidos sin necesidad de conectar un dispositivo externo.
 
-La siguiente función representa una propuesta para las próximas pruebas:
+La siguiente función representa la adaptación prevista para utilizar el parlante integrado:
 
 ```python
 def sound_alert():
     music.set_built_in_speaker_enabled(True)
-
     music.play_tone(220, 200)
     basic.pause(1000)
     music.play_tone(440, 200)
@@ -132,17 +135,15 @@ def sound_alert():
 
 Esta versión mantiene la secuencia de tres sonidos utilizada anteriormente, pero aprovecha el parlante integrado de la micro:bit.
 
-Su funcionamiento deberá verificarse durante las próximas pruebas físicas.
+Para adaptar el sistema de alarma utilizamos MakeCode, configurando las funciones de alerta visual y sonora de la micro:bit. Posteriormente, realizamos pruebas físicas para comprobar su funcionamiento.
+
+![Programación del sistema de alarma en Microsoft MakeCode](imagenes/Prueba_programacion.jpeg)
 
 ### Dificultades durante las pruebas
 
-Durante la clase realizamos varios intentos para comprobar el funcionamiento de los sensores PIR.
+Después de realizar estas pruebas y revisar las conexiones entre las micro, las placas de expansión y los sensores PIR, no conseguimos obtener la respuesta esperada.
 
-A pesar de revisar las conexiones entre las micro:bit, las placas de expansión y los sensores, no conseguimos obtener la respuesta esperada.
-
-Nuestro objetivo era que, al detectar movimiento, la micro:bit activara una alerta visual y sonora.
-
-Sin embargo, no logramos confirmar correctamente la detección de movimiento.
+El principal inconveniente fue que no pudimos confirmar que los sensores enviaran correctamente la señal de detección de movimiento a la micro. Esto impidió verificar el funcionamiento completo del sistema.
 
 ### Pruebas individuales de los sensores PIR
 
@@ -152,26 +153,28 @@ Para ello utilizamos códigos más sencillos, destinados únicamente a comprobar
 
 Realizamos varios intentos, pero continuamos sin obtener los resultados esperados.
 
-A partir de estas pruebas, llegamos a la hipótesis de que los sensores PIR podrían encontrarse dañados, aunque todavía no pudimos confirmar definitivamente esta situación.
+A partir de estas pruebas, planteamos la hipótesis de que los sensores PIR podrían encontrarse dañados, aunque no pudimos confirmar definitivamente esta situación.
 
 ### Preparación para la próxima clase
 
-Durante el fin de semana posterior a la clase conseguimos dos sensores PIR nuevos para repetir las pruebas físicas.
+Como parte de la preparación para la siguiente clase, durante el fin de semana conseguimos dos sensores PIR nuevos para repetir las pruebas físicas.
 
-Nuestro próximo objetivo será conectar nuevamente los componentes y comprobar que los sensores puedan detectar movimiento correctamente.
+Nuestro próximo objetivo será conectar nuevamente los componentes y comprobar si los sensores detectan movimiento correctamente.
 
-Una vez que logremos verificar la detección, continuaremos con la activación de la alarma sonora mediante el parlante integrado de la micro:bit.
+Una vez que logremos verificar la detección, continuaremos con las pruebas de activación de la alarma sonora mediante el parlante integrado de la micro:bit.
 
 También quedó pendiente revisar el control de la variable `movimiento_anterior` para permitir nuevas detecciones después de que el sensor deje de registrar movimiento.
 
-Por el momento, seguimos trabajando en esta primera etapa del proyecto, sin avanzar todavía hacia el envío de mensajes o notificaciones a otros dispositivos.
+Por el momento, seguimos trabajando en esta primera etapa del proyecto, sin avanzar todavía hacia las pruebas de comunicación por radio ni el envío de mensajes o notificaciones a otros dispositivos.
 
 ### Conclusión
 
-Aunque no conseguimos completar satisfactoriamente las pruebas físicas, esta clase representó un avance importante para el proyecto.
+Aunque no conseguimos completar satisfactoriamente las pruebas físicas, esta clase representó un avance importante para el desarrollo del proyecto.
 
 Después de las dificultades ocasionadas por el robo de materiales, logramos reunir nuevamente los componentes necesarios, retomar el montaje físico y realizar diferentes pruebas de funcionamiento.
 
-También pudimos identificar posibles problemas en los sensores PIR y establecer los próximos pasos para continuar desarrollando nuestro sistema de alarma.
+Durante la jornada también trabajamos en la adaptación del código para utilizar el parlante integrado de la micro:bit y efectuamos pruebas individuales de los sensores PIR para intentar identificar el origen de los inconvenientes.
 
-El trabajo realizado nos permitió continuar avanzando hacia el objetivo de implementar un sistema capaz de detectar movimiento y activar una alarma mediante la micro:bit.
+Si bien no pudimos confirmar que los sensores estuvieran dañados, establecimos los próximos pasos para continuar con las pruebas utilizando nuevos componentes.
+
+El trabajo realizado nos permitió avanzar en la integración de los elementos físicos y la programación, acercándonos al objetivo de implementar un sistema capaz de detectar movimiento y activar una alarma mediante la micro:bit.
