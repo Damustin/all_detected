@@ -178,3 +178,63 @@ Durante la jornada también trabajamos en la adaptación del código para utiliz
 Si bien no pudimos confirmar que los sensores estuvieran dañados, establecimos los próximos pasos para continuar con las pruebas utilizando nuevos componentes.
 
 El trabajo realizado nos permitió avanzar en la integración de los elementos físicos y la programación, acercándonos al objetivo de implementar un sistema capaz de detectar movimiento y activar una alarma mediante la micro:bit.
+
+
+
+## 15/10/2026 — Pruebas de funcionamiento de los sensores PIR con Arduino
+
+Durante la clase realizamos pruebas utilizando una placa Arduino para comprobar el funcionamiento de los sensores PIR, debido a los inconvenientes que habíamos tenido anteriormente al utilizarlos con la micro:bit.
+
+Para realizar las pruebas, conectamos los sensores PIR a Arduino y utilizamos un código que permitía detectar movimiento mediante el encendido y apagado de los LED.
+
+Durante las pruebas observamos que, al realizar movimientos frente al sensor, los LED se encendían y, cuando dejaba de detectar movimiento, se apagaban.
+
+De esta manera, comprobamos visualmente que los sensores respondían correctamente al utilizar una alimentación de **5 V**, mientras que con **3 V** no obtuvimos los resultados esperados.
+
+### Evidencia de la prueba
+
+En el siguiente video se muestra el funcionamiento del sensor PIR conectado a Arduino, donde se puede observar la respuesta de los LED ante la detección de movimiento.
+
+[Ver video de la prueba con Arduino](videos/Prueba_PIR_Arduino.mp4)
+
+### Código utilizado en Arduino
+
+Para realizar las pruebas utilizamos el siguiente código, que permite leer la señal del sensor PIR y controlar el encendido y apagado del LED integrado de Arduino según la detección de movimiento.
+
+```cpp
+const int MOTION_PIN = 2; // Pin conectado al sensor PIR
+
+void setup()
+{
+  Serial.begin(9600);
+
+  pinMode(MOTION_PIN, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop()
+{
+  int proximity = digitalRead(MOTION_PIN);
+  Serial.write(proximity);
+
+  if (proximity == LOW)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+    Serial.println("Motion detected!");
+  }
+  else
+  {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+
+  delay(1000);
+}
+```
+
+### Resultados obtenidos
+
+Las pruebas realizadas permitieron comprobar que los sensores PIR funcionaban con Arduino al utilizar una alimentación de **5 V**.
+
+A partir de estos resultados, continuamos realizando pruebas con la micro:bit y su placa de expansión para investigar las dificultades que presentaban los sensores al utilizarlos en nuestro proyecto **ALL DETECTED**.
+
+---
