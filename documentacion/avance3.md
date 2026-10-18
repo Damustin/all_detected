@@ -181,6 +181,7 @@ El trabajo realizado nos permitió avanzar en la integración de los elementos f
 
 
 
+
 ## 15/10/2026 — Pruebas de funcionamiento de los sensores PIR con Arduino
 
 Durante la clase realizamos pruebas utilizando una placa Arduino para comprobar el funcionamiento de los sensores PIR, debido a los inconvenientes que habíamos tenido anteriormente al utilizarlos con la micro:bit.
@@ -236,5 +237,128 @@ void loop()
 Las pruebas realizadas permitieron comprobar que los sensores PIR funcionaban con Arduino al utilizar una alimentación de **5 V**.
 
 A partir de estos resultados, continuamos realizando pruebas con la micro:bit y su placa de expansión para investigar las dificultades que presentaban los sensores al utilizarlos en nuestro proyecto **ALL DETECTED**.
+
+---
+
+### Pruebas con micro:bit y placa de expansión
+
+Después de comprobar el funcionamiento de los sensores PIR con Arduino, continuamos realizando pruebas utilizando la micro:bit y su placa de expansión.
+
+El objetivo fue intentar utilizar los sensores con una alimentación de **5 V**, debido a que en las pruebas anteriores no habíamos obtenido resultados satisfactorios con 3 V.
+
+Durante esta etapa realizamos diferentes intentos, modificando las conexiones mediante jumpers, ajustando la sensibilidad de los sensores y probando distintas configuraciones.
+
+También cargamos un código desarrollado en **MakeCode** para realizar la lectura del sensor PIR mediante el pin **P0**, activar las alertas visuales y sonoras y enviar una señal de alerta por radio.
+
+Se realizaron pruebas con diferentes configuraciones de lectura, tanto digitales como analógicas, buscando obtener una respuesta del sensor.
+
+Sin embargo, a pesar de los intentos realizados, no conseguimos que los sensores PIR funcionaran correctamente con la micro:bit.
+
+Además, aunque intentamos utilizar una alimentación de 5 V mediante la placa de expansión, no pudimos confirmar ese valor mediante una medición.
+
+### Código utilizado en MakeCode
+
+El siguiente código corresponde a una de las versiones utilizadas durante las pruebas con micro:bit.
+
+```python
+radio.set_group(20)
+radio.set_transmit_power(7)
+
+PIR = DigitalPin.P0
+
+def screen_alert():
+    basic.show_icon(IconNames.ANGRY)
+    basic.show_string("ALERT")
+
+def sound_alert():
+    pins.analog_set_pitch_pin(AnalogPin.P1)
+
+    pins.analog_pitch(220, 200)
+    basic.pause(1000)
+    pins.analog_pitch(440, 200)
+    basic.pause(1000)
+    pins.analog_pitch(880, 200)
+    basic.pause(1000)
+
+def send_alert():
+    radio.send_string("alert")
+
+def on_received_string(mensaje):
+    if mensaje == "alert":
+        screen_alert()
+        sound_alert()
+
+radio.on_received_string(on_received_string)
+
+movimiento_anterior = 0
+
+#serial.redirect_to_usb()
+
+def on_forever():
+    #basic.show_icon(IconNames.HEART)
+    global movimiento_anterior
+
+    movimiento = pins.digital_read_pin(PIR)
+    #movimiento = pins.analog_read_pin(AnalogPin.P0)
+
+    #serial.write_value("x", movimiento)
+
+    if movimiento == 1:
+        led.plot(1, 1)
+        basic.pause(50)
+        led.unplot(1, 1)
+    else:
+        led.plot(2, 2)
+        basic.pause(50)
+        led.unplot(2, 2)
+
+    if movimiento == 1 and movimiento_anterior == 0:
+        #if False:
+        screen_alert()
+        send_alert()
+        sound_alert()
+
+        movimiento_anterior = movimiento
+
+    basic.pause(100)
+    #basic.show_icon(IconNames.SAD)
+
+    led.plot(0, 0)
+    basic.pause(50)
+    led.unplot(0, 0)
+
+basic.forever(on_forever)
+```
+
+### Resultados obtenidos
+
+A diferencia de las pruebas realizadas con Arduino, no logramos obtener una respuesta satisfactoria de los sensores PIR utilizando la micro:bit.
+
+Durante los ensayos modificamos conexiones, configuraciones y aspectos de la programación, pero no conseguimos resolver el inconveniente.
+
+Estos resultados nos llevaron a evaluar, junto con el profesor, la posibilidad de utilizar otro tipo de sensor de detección que fuera más sencillo de implementar con micro:bit.
+
+---
+
+
+### Avances en la presentación de las maquetas
+
+También quedaron prontas las dos maquetas que representan las viviendas del proyecto.
+
+Ambas viviendas cuentan con puertas, ventanas, elementos decorativos y carteles identificadores. Además, se colocaron los nombres **Vivienda 1** y **Vivienda 2**, junto con el identificador del proyecto.
+
+Estas mejoras permiten diferenciar las viviendas y presentar de forma más clara el escenario donde se implementará el sistema de detección de movimiento.
+
+**Foto de las maquetas:**
+
+![Maquetas de las viviendas 1 y 2](imagenes/Maquetas_Vivienda_1_y_2.jpeg)
+
+### Conclusiones y próximos pasos
+
+Durante la clase comprobamos que los sensores PIR funcionaban correctamente al utilizarlos con Arduino y una alimentación de **5 V**.
+
+Sin embargo, después de realizar diferentes pruebas con la micro:bit, modificar conexiones y probar distintas configuraciones de programación, no conseguimos obtener los resultados esperados.
+
+A partir de estos inconvenientes, conversamos con el profesor sobre la posibilidad de reemplazar los sensores PIR por otro tipo de sensor, similar al utilizado por otro equipo, que ya había demostrado funcionar con micro:bit.
 
 ---
