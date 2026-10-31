@@ -832,3 +832,83 @@ De esta manera, el sensor ultrasónico comienza a cumplir la función que origin
 A partir de estos resultados, continuamos con la integración del sistema completo, incorporando la comunicación entre las dos micro:bit y las alertas que muestran diferentes imágenes en pantalla.
 
 Esta siguiente etapa nos permite avanzar hacia la demostración del funcionamiento de ALL DETECTED utilizando las dos viviendas del proyecto.
+
+
+
+### Integración del sistema de alertas entre las dos viviendas
+
+Luego de comprobar el funcionamiento de las alertas con el sensor ultrasónico HC-SR04, continuamos trabajando en la integración de las dos micro:bit para representar el funcionamiento de nuestro proyecto ALL DETECTED utilizando las maquetas de las viviendas.
+
+Para esta prueba utilizamos una micro:bit emisora, una placa de expansión, el sensor ultrasónico HC-SR04 y una segunda micro:bit que funciona como receptora de las alertas.
+
+El objetivo de esta etapa fue comprobar que, al detectar la presencia de una persona u objeto en la vivienda 1, el sistema pudiera enviar una alerta a la micro:bit ubicada en la vivienda 2 mediante comunicación por radio.
+
+#### Distribución de los componentes
+
+Para realizar la demostración utilizamos las dos maquetas de viviendas de nuestro proyecto ALL DETECTED.
+
+En la vivienda 1 colocamos la micro:bit emisora, conectada a una placa de expansión y al sensor ultrasónico HC-SR04. El sensor se encuentra orientado hacia arriba para poder pasar la mano por encima y simular la presencia de una persona.
+
+En la vivienda 2, ubicada a la derecha, colocamos la segunda micro:bit, que funciona como receptora de las alertas enviadas desde la primera vivienda.
+
+De esta manera, representamos cómo una detección realizada en la vivienda 1 puede comunicarse mediante radio a la vivienda 2, activando las alertas visuales y sonoras en ambas micro:bit.
+
+#### Funcionamiento de la micro:bit emisora (vivienda 1)
+
+La micro:bit emisora es la encargada de realizar las mediciones mediante el sensor ultrasónico HC-SR04.
+
+Al iniciar el programa, muestra una cara feliz en su pantalla, indicando el estado inicial del sistema.
+
+Cuando pasamos la mano sobre el sensor y este registra una distancia de 50 centímetros o menos, se activa la alerta.
+
+En ese momento, la micro:bit envía el mensaje `alert` por radio a la micro:bit receptora de la vivienda 2. Luego muestra una cara enojada durante dos segundos, presenta el mensaje `ALERT` y reproduce tres tonos mediante su parlante integrado.
+
+Al finalizar la secuencia, vuelve a mostrar una cara feliz.
+
+Además, el programa registra las distancias en la consola serial y evita repetir constantemente la alerta. Para permitir una nueva activación, la distancia debe superar los 55 centímetros.
+
+#### Funcionamiento de la micro:bit receptora (vivienda 2)
+
+La segunda micro:bit se encuentra ubicada en la vivienda 2 y tiene como función recibir las alertas enviadas desde la vivienda 1.
+
+Ambas micro:bit están configuradas en el mismo grupo de radio, lo que permite establecer la comunicación entre ellas.
+
+Al iniciar el programa, la micro:bit receptora muestra una cara feliz mientras espera recibir mensajes.
+
+Cuando recibe el mensaje `alert`, muestra una cara enojada durante dos segundos, presenta el mensaje `ALERT` y reproduce los tres tonos programados mediante su parlante integrado.
+
+Al finalizar la alerta, vuelve a mostrar una cara feliz y continúa esperando nuevos mensajes.
+
+De esta manera, el sistema permite comunicar una detección realizada en la vivienda 1 a la vivienda 2.
+
+
+#### Códigos utilizados
+
+Para esta prueba utilizamos dos códigos desarrollados en Python para micro:bit, uno para el emisor y otro para el receptor.
+
+- [Ver código del emisor](codigos_avance3/Emisor_HC-SR04.py)
+- [Ver código del receptor](codigos_avance3/Receptor_Alerta.py)
+
+#### Video del avance de integración
+
+En este video mostramos lo que realmente buscamos lograr con nuestro proyecto ALL DETECTED: detectar la presencia de una persona en una vivienda y enviar una alerta a otra mediante comunicación por radio.
+
+Durante la demostración utilizamos las dos maquetas y simulamos una detección pasando la mano por encima del sensor ultrasónico HC-SR04.
+
+Al detectar la proximidad de la mano, el sistema activa las alertas en ambas micro:bit, mostrando primero una cara enojada, luego el mensaje `ALERT`, acompañado de tres tonos, y finalmente una cara feliz.
+
+Esta prueba representa un avance importante, ya que logramos integrar la detección y la comunicación entre ambas viviendas, que es uno de los principales objetivos de nuestro proyecto.
+
+[Ver video del avance de integración de ALL DETECTED](videos/Avance_Integracion_ALL_DETECTED.mp4)
+
+#### Resultados obtenidos
+
+Logramos integrar el sensor ultrasónico HC-SR04 con el sistema de alertas y establecer la comunicación por radio entre las dos micro:bit.
+
+Durante la prueba comprobamos que, al pasar la mano sobre el sensor, se activaban las alertas visuales y sonoras en ambos dispositivos.
+
+También mejoramos la visualización de la cara enojada, haciendo que permaneciera en pantalla durante dos segundos antes de mostrar el mensaje `ALERT`.
+
+Con estos resultados conseguimos demostrar el funcionamiento conjunto de los principales componentes de ALL DETECTED.
+
+Aunque todavía quedan aspectos por mejorar, este avance nos permite continuar desarrollando el sistema a partir de una prueba funcional.
