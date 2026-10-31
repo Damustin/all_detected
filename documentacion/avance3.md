@@ -240,6 +240,7 @@ De esta manera, dejamos planteada una posible alternativa para continuar desarro
 ---
 
 
+
 ## 22/10/2026 — Pruebas del sensor ultrasónico HC-SR04 con Arduino
 
 Durante la clase continuamos realizando pruebas con un sensor ultrasónico HC-SR04, como alternativa a los sensores PIR utilizados anteriormente.
@@ -252,11 +253,11 @@ Ante esta situación, buscamos otros sensores en el Espacio Maker para continuar
 
 ### Evidencia fotográfica del sensor HC-SR04
 
-**Fotografía pendiente:** se incorporará una imagen del sensor ultrasónico HC-SR04 en la próxima clase.
+En la siguiente fotografía se observa el montaje realizado durante la clase, utilizando una placa Arduino Uno y un sensor ultrasónico HC-SR04 conectado mediante cables.
 
-<!-- Cuando tengamos la fotografía, reemplazar el texto anterior por:
-![Sensor ultrasónico HC-SR04](imagenes/Sensor_HC_SR04.jpeg)
--->
+Esta conexión fue utilizada para intentar comprobar el funcionamiento del sensor antes de continuar las pruebas con la micro:bit.
+
+![Prueba del sensor HC-SR04 con Arduino](imagenes/Prueba_HC-SR04_Arduino.jpeg)
 
 ### Pruebas del sensor HC-SR04 con micro:bit y placa de expansión
 
@@ -278,31 +279,9 @@ Para realizar estas pruebas utilizamos un programa que enviaba una señal de act
 
 El código establecía un límite de detección de 10 centímetros y utilizaba la pantalla LED de la micro:bit como indicador visual.
 
-```python
-def on_forever():
-    pins.digital_write_pin(DigitalPin.P0, 0)
-    control.wait_micros(2)
-    pins.digital_write_pin(DigitalPin.P0, 1)
-    control.wait_micros(10)
-    pins.digital_write_pin(DigitalPin.P0, 0)
+El código utilizado se encuentra disponible en el siguiente enlace:
 
-    tiempo = pins.pulse_in(
-        DigitalPin.P1,
-        PulseValue.HIGH,
-        30000
-    )
-
-    distancia = tiempo * 0.0343 / 2
-
-    if tiempo > 0 and distancia < 10:
-        basic.show_icon(IconNames.HEART)
-    else:
-        basic.clear_screen()
-
-    basic.pause(100)
-
-basic.forever(on_forever)
-```
+[Ver código de prueba HC-SR04 con micro:bit](codigos_avance3/Prueba_HC-SR04_Microbit.py)
 
 ### Resultados obtenidos
 
@@ -310,7 +289,9 @@ A pesar de los intentos realizados, no logramos verificar correctamente el funci
 
 La principal dificultad estuvo relacionada con la alimentación y los niveles de voltaje del sensor, por lo que decidimos no continuar con conexiones que pudieran comprometer el funcionamiento de la placa.
 
+
 ---
+
 
 ### Pruebas de comunicación mediante ESP32, MQTT y Python
 
@@ -326,157 +307,57 @@ Para ello utilizamos un servidor MQTT como intermediario, permitiendo que la ESP
 
 Primero configuramos la ESP32 para conectarse a una red Wi-Fi y publicar periódicamente el mensaje `ENVIAR_CORREO`.
 
-Posteriormente trabajamos con un programa Python llamado `receptor.py`, encargado de recibir los mensajes y gestionar el intento de envío de una notificación mediante Gmail.
+Posteriormente trabajamos con un programa desarrollado en Python, encargado de recibir los mensajes y gestionar el intento de envío de una notificación mediante Gmail.
 
-Ejecutamos el programa desde PowerShell. Durante los primeros intentos surgieron errores de conexión y ejecución, que fuimos revisando hasta conseguir establecer la comunicación.
+Ejecutamos el programa desde PowerShell para comprobar la recepción de los mensajes enviados desde Wokwi.
 
-Finalmente, logramos que la ESP32 enviara los mensajes y que Python los recibiera correctamente.
+Durante las pruebas logramos establecer la conexión con el servidor MQTT y recibir correctamente los mensajes publicados por la ESP32.
 
 ### Código utilizado en ESP32 (Wokwi)
 
-El siguiente código permite conectar la ESP32 a Wi-Fi y publicar el mensaje `ENVIAR_CORREO` cada cinco segundos.
+Para realizar estas pruebas utilizamos un código que permite conectar la ESP32 a una red Wi-Fi y publicar el mensaje `ENVIAR_CORREO` cada cinco segundos mediante MQTT.
 
-```cpp
-#include <WiFi.h>
-#include <PubSubClient.h>
+El código utilizado se encuentra disponible en el siguiente enlace:
 
-const char* ssid = "Wokwi-GUEST";
-const char* password = "";
+[Ver código de comunicación ESP32 mediante MQTT](codigos_avance3/ESP32_MQTT_Wokwi.ino)
 
-const char* mqtt_server = "broker.hivemq.com";
-const int mqtt_port = 1883;
+### Código utilizado en Python
 
-const char* tema = "arduino-internet-prueba-84721";
+También utilizamos un programa desarrollado en Python para recibir los mensajes enviados desde la ESP32 mediante el servidor MQTT.
 
-WiFiClient conexionWiFi;
-PubSubClient clienteMQTT(conexionWiFi);
+Este programa incluye una función destinada a intentar enviar una notificación por correo electrónico utilizando Gmail.
 
-void conectarMQTT() {
-  while (!clienteMQTT.connected()) {
-    Serial.print("Conectando al servidor MQTT...");
+El código utilizado se encuentra disponible en el siguiente enlace:
 
-    if (clienteMQTT.connect("ESP32-Wokwi-Prueba-84721")) {
-      Serial.println(" conectado!");
-    } else {
-      Serial.print(" Error: ");
-      Serial.println(clienteMQTT.state());
-      delay(3000);
-    }
-  }
-}
+[Ver código de recepción MQTT mediante Python](codigos_avance3/Recepcion_MQTT_Python.py)
 
-void setup() {
-  Serial.begin(115200);
+### Evidencias de las pruebas
 
-  WiFi.begin(ssid, password);
+**Conexión de Python al servidor MQTT**
 
-  Serial.print("Conectando al Wi-Fi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
+Durante las pruebas utilizamos Python para establecer una conexión con el servidor MQTT, con el objetivo de recibir los mensajes enviados desde la ESP32 simulada en Wokwi.
 
-  Serial.println("\nWi-Fi conectado!");
+La siguiente captura muestra que logramos establecer la conexión y que el programa quedó a la espera de mensajes.
 
-  clienteMQTT.setServer(mqtt_server, mqtt_port);
+![Conexión de Python al servidor MQTT](imagenes/Conexion_MQTT_Python.jpeg)
 
-  conectarMQTT();
-}
+**Comunicación entre ESP32 y Python mediante MQTT**
 
-void loop() {
-  if (!clienteMQTT.connected()) {
-    conectarMQTT();
-  }
+Continuamos las pruebas configurando la ESP32 para enviar el mensaje `ENVIAR_CORREO` mediante el servidor MQTT.
 
-  clienteMQTT.loop();
+Como se observa en la siguiente captura, logramos transmitir el mensaje desde Wokwi y recibirlo correctamente mediante Python.
 
-  clienteMQTT.publish(tema, "ENVIAR_CORREO");
-  Serial.println("Mensaje enviado: ENVIAR_CORREO");
+![Comunicación entre ESP32 y Python](imagenes/Comunicacion_ESP32_MQTT_Python.jpeg)
 
-  delay(5000);
-}
-```
+### Resultados obtenidos
 
-### Código utilizado en Python (receptor.py)
+Durante esta prueba logramos establecer la comunicación entre la ESP32 simulada en Wokwi y el programa desarrollado en Python mediante el protocolo MQTT.
 
-Este programa permite recibir los mensajes enviados desde la ESP32 y contiene una función para intentar enviar un correo electrónico mediante Gmail.
+Esto nos permitió comprobar que podíamos transmitir mensajes entre ambos programas utilizando una conexión a Internet.
 
-```python
-import os
-import smtplib
-import getpass
-from email.message import EmailMessage
+Aunque conseguimos recibir correctamente el mensaje `ENVIAR_CORREO`, no logramos completar el envío de la notificación por correo electrónico.
 
-import paho.mqtt.client as mqtt
-
-# Configuración MQTT
-BROKER = "broker.hivemq.com"
-PUERTO = 1883
-
-# IMPORTANTE: cambia este tema por uno largo y único.
-# Usa exactamente el mismo tema en Wokwi.
-TEMA = "arduino-internet-prueba-84721"
-
-# Datos del correo
-REMITENTE = input("Tu dirección de Gmail: ")
-DESTINATARIO = input("Correo destinatario: ")
-CLAVE_APP = getpass.getpass("Contraseña de aplicación de Gmail: ")
-correo_enviado = False
-
-
-def enviar_correo():
-    mensaje = EmailMessage()
-    mensaje["Subject"] = "Prueba desde Arduino"
-    mensaje["From"] = REMITENTE
-    mensaje["To"] = DESTINATARIO
-    mensaje.set_content(
-        "¡Funciona! Python recibió la instrucción de la ESP32 virtual."
-    )
-
-    with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as servidor:
-        servidor.set_debuglevel(1)
-        servidor.ehlo()
-        servidor.starttls()
-        servidor.ehlo()
-        servidor.login(REMITENTE, CLAVE_APP)
-        servidor.send_message(mensaje)
-
-    print("¡Correo enviado correctamente!")
-
-
-def al_conectar(cliente, datos, flags, razon_codigo, propiedades):
-    print("Conectado al servidor MQTT")
-    cliente.subscribe(TEMA)
-    print("Esperando mensajes...")
-
-
-def al_recibir(cliente, datos, mensaje):
-    global correo_enviado
-
-    texto = mensaje.payload.decode("utf-8")
-    print("Mensaje recibido:", texto)
-
-    if texto == "ENVIAR_CORREO" and not correo_enviado:
-        correo_enviado = True
-
-        try:
-            enviar_correo()
-        except Exception as error:
-            correo_enviado = False
-            print("Error al enviar el correo:", error)
-
-
-cliente = mqtt.Client(
-    callback_api_version=mqtt.CallbackAPIVersion.VERSION2
-)
-
-cliente.on_connect = al_conectar
-cliente.on_message = al_recibir
-
-print("Conectando al servidor MQTT...")
-cliente.connect(BROKER, PUERTO, 60)
-cliente.loop_forever()
-```
+Por este motivo, esta funcionalidad quedó pendiente para continuar trabajando en próximas clases, con el objetivo de incorporar notificaciones externas al sistema ALL DETECTED.
 
 
 ### Evidencias de las pruebas
@@ -505,7 +386,23 @@ Esta prueba nos permitió avanzar en el desarrollo de un mecanismo para enviar n
 
 Sin embargo, el envío de la notificación por correo electrónico quedó pendiente de completar, por lo que continuaremos trabajando en esta funcionalidad durante las próximas clases.
 
+### Conclusión
 
+Durante esta clase continuamos enfrentando dificultades para conseguir el funcionamiento de nuestro proyecto ALL DETECTED.
+
+Después de los inconvenientes que habíamos tenido con los sensores PIR, intentamos utilizar el sensor ultrasónico HC-SR04 como alternativa. Sin embargo, tampoco logramos comprobar su funcionamiento con la micro:bit, principalmente por las dificultades relacionadas con la alimentación y los niveles de voltaje.
+
+También realizamos pruebas de comunicación mediante ESP32, MQTT y Python. Aunque conseguimos transmitir y recibir mensajes correctamente, no logramos completar el envío de notificaciones por correo electrónico.
+
+Por este motivo, una vez más no pudimos realizar una demostración del sistema completo ni registrar un video que mostrara el funcionamiento que buscamos conseguir.
+
+Esta etapa del proyecto nos está llevando mucho más tiempo y esfuerzo del que esperábamos. Los problemas que venimos encontrando nos han generado frustración y desgaste, especialmente porque dedicamos muchas horas a realizar pruebas sin obtener los resultados que buscamos.
+
+A pesar de estas dificultades, no queremos abandonar el proyecto. Cada prueba nos permite conocer mejor los componentes, identificar problemas y buscar nuevas soluciones.
+
+Nuestro objetivo sigue siendo conseguir que ALL DETECTED detecte movimiento, active las alertas y permita comunicar esa situación entre las dos viviendas.
+
+Aunque todavía nos queda trabajo por delante, vamos a continuar realizando pruebas y buscando alternativas hasta lograr una demostración funcional de nuestro sistema.
 
 ## 29/10/2026 — Última prueba con sensor PIR y adaptación al sensor ultrasónico HC-SR04
 
