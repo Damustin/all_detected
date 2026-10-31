@@ -689,3 +689,92 @@ Esta fue la última prueba que realizamos con el sensor PIR. A pesar de modifica
 
 Debido al tiempo dedicado a estas pruebas y a las dificultades encontradas, decidimos dejar de trabajar con el sensor PIR y continuar el desarrollo del proyecto utilizando un sensor ultrasónico de distancia HC-SR04.
 
+
+### Adaptación al sensor ultrasónico HC-SR04
+
+Luego de realizar la última prueba con el sensor PIR y no obtener resultados confiables, decidimos continuar el desarrollo del proyecto utilizando un sensor ultrasónico de distancia HC-SR04.
+
+El objetivo de este cambio fue encontrar una alternativa que nos permitiera detectar la presencia de personas u objetos mediante la medición de distancias.
+
+A diferencia del sensor PIR, que detecta cambios en la radiación infrarroja, el HC-SR04 utiliza ondas ultrasónicas para calcular la distancia entre el sensor y un objeto.
+
+#### Conexión del sensor ultrasónico HC-SR04
+
+Para comenzar las pruebas utilizamos una micro:bit, una placa de expansión y el sensor ultrasónico HC-SR04.
+
+Este sensor cuenta con cuatro conectores: VCC, TRIG, ECHO y GND. Cada uno cumple una función necesaria para realizar las mediciones de distancia.
+
+La siguiente tabla muestra las conexiones recomendadas y la función de cada conector:
+
+| Sensor HC-SR04 | Conectar a | Función |
+|---|---|---|
+| VCC | 5V de la placa de expansión | Alimentación eléctrica del sensor |
+| TRIG | P0 (SIG) | Envía el pulso que inicia la medición |
+| ECHO | P1 (SIG), mediante divisor de tensión | Recibe la señal para calcular la distancia |
+| GND | GND de la placa de expansión | Conexión a tierra |
+
+El sensor HC-SR04 convencional utiliza una alimentación de 5V, mientras que la micro:bit trabaja con señales de 3,3V. Por este motivo, para realizar una conexión segura, es necesario adaptar la señal ECHO mediante un divisor de tensión.
+
+La tabla muestra las conexiones recomendadas. A continuación, documentamos el montaje que realizamos durante la clase.
+
+#### Diagrama de conexiones
+
+Para representar las conexiones utilizadas durante la prueba, elaboramos un diagrama que muestra la micro:bit, la placa de expansión y el sensor ultrasónico HC-SR04.
+
+En la imagen se pueden identificar los cuatro conectores del sensor, los cables utilizados y su disposición en la placa de expansión.
+
+Este diagrama nos permite visualizar de forma más sencilla el montaje realizado durante la clase.
+
+![Diagrama de conexiones del sensor HC-SR04](imagenes/Diagrama_Conexion_HC-SR04.png)
+
+#### Montaje real del sensor ultrasónico
+
+En la siguiente fotografía se observa cómo quedó conectado el sensor ultrasónico HC-SR04 a la micro:bit mediante la placa de expansión.
+
+Se pueden apreciar los componentes utilizados, la distribución de los cables y el montaje que empleamos para realizar las primeras pruebas de medición de distancia.
+
+La fotografía complementa el diagrama anterior, mostrando cómo quedó armado el circuito durante la clase.
+
+![Montaje real del sensor ultrasónico HC-SR04](imagenes/Conexion_HC-SR04.png)
+
+#### Código utilizado en la prueba
+
+Para comprobar el funcionamiento del sensor ultrasónico HC-SR04 utilizamos un código desarrollado en Python para micro:bit.
+
+El programa enviaba una señal desde el pin P0 y recibía la respuesta mediante el pin P1, permitiendo calcular la distancia en centímetros.
+
+Durante la prueba, los resultados se mostraban en la consola serial y en la pantalla de la micro:bit. Cuando no se recibía una señal de retorno, el programa mostraba el mensaje `ERROR: No se recibe eco`.
+
+El código utilizado se encuentra disponible en el siguiente enlace:
+
+[Ver código de la primera prueba del sensor HC-SR04](codigos_avance3/Prueba_HC-SR04.py)
+
+#### Primera prueba de funcionamiento del sensor HC-SR04
+
+Una vez realizado el montaje, comenzamos a comprobar el funcionamiento del sensor ultrasónico mediante un programa de medición de distancias.
+
+Durante esta primera prueba utilizamos la mano, acercándola al sensor para observar cómo respondía ante diferentes distancias.
+
+Cuando el sensor no recibía una señal de retorno, el programa mostraba el mensaje `ERROR: No se recibe eco`.
+
+Sin embargo, al acercar la mano frente al sensor, comenzaron a aparecer mediciones como `Distancia: 11 cm`, entre otros valores, según la posición de la mano.
+
+Esto nos permitió comprobar que el sensor respondía al acercar la mano, registrando distancias que podrían utilizarse para identificar movimientos.
+
+#### Video de la primera prueba
+
+En el siguiente video se observa el funcionamiento del sensor ultrasónico HC-SR04 durante la prueba realizada en clase.
+
+La grabación muestra cómo el programa alternaba entre el mensaje `ERROR: No se recibe eco` y las mediciones de distancia obtenidas al acercar la mano al sensor.
+
+[Ver video de la primera prueba del sensor HC-SR04](videos/Primera_Prueba_HC-SR04.mp4)
+
+#### Resultados obtenidos
+
+Durante esta primera prueba logramos registrar mediciones utilizando el sensor ultrasónico HC-SR04. Al acercar la mano frente al sensor, el programa comenzó a mostrar valores de distancia, lo que nos permitió observar una respuesta ante la presencia de un objeto.
+
+Si bien el funcionamiento todavía no era completamente estable, esta prueba fue importante para evaluar una alternativa al sensor PIR.
+
+Nuestro objetivo no es conocer la distancia exacta de un objeto, sino aprovechar las mediciones del sensor para identificar cambios que puedan indicar movimiento.
+
+De esta manera, buscamos adaptar el sensor ultrasónico al proyecto ALL DETECTED, para que en futuras pruebas pueda reconocer movimientos dentro de una zona determinada y activar una alerta, cumpliendo una función similar a la que originalmente habíamos pensado para el sensor PIR.
