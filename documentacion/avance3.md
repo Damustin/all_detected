@@ -1,6 +1,7 @@
 
 # Informe de Avance 3 — Octubre 2026
 
+
 ## 08/10/2026 — Montaje físico y pruebas con sensores PIR
 
 ### Preparación de los materiales
@@ -61,54 +62,7 @@ El siguiente código corresponde a una versión anterior que utilizamos como bas
 
 Incluye funciones para detectar movimiento, mostrar una alerta visual, reproducir sonidos mediante un piezoeléctrico y transmitir una señal por radio.
 
-```python
-radio.set_group(20)
-radio.set_transmit_power(7)
-
-PIR = DigitalPin.P0
-
-def screen_alert():
-    basic.show_icon(IconNames.ANGRY)
-    basic.show_string("ALERT")
-
-def sound_alert():
-    pins.analog_set_pitch_pin(AnalogPin.P1)
-
-    pins.analog_pitch(220, 200)
-    basic.pause(1000)
-    pins.analog_pitch(440, 200)
-    basic.pause(1000)
-    pins.analog_pitch(880, 200)
-    basic.pause(1000)
-
-def send_alert():
-    radio.send_string("alert")
-
-def on_received_string(mensaje):
-    if mensaje == "alert":
-        screen_alert()
-        sound_alert()
-
-radio.on_received_string(on_received_string)
-
-movimiento_anterior = 0
-
-def on_forever():
-    global movimiento_anterior
-
-    movimiento = pins.digital_read_pin(PIR)
-
-    if movimiento == 1 and movimiento_anterior == 0:
-        screen_alert()
-        send_alert()
-        sound_alert()
-
-        movimiento_anterior = movimiento
-
-        basic.pause(100)
-
-basic.forever(on_forever)
-```
+[Ver código original con piezoeléctrico](codigos_avance3/Alarma_PIR_Piezoelectrico.py)
 
 Aunque este código contiene funciones de comunicación por radio, todavía no habíamos comenzado a realizar pruebas de esa funcionalidad.
 
@@ -120,7 +74,9 @@ Al comenzar a trabajar con los componentes físicos, decidimos utilizar el parla
 
 Para esta adaptación trabajamos con las funciones de música de MakeCode, que permiten generar sonidos sin necesidad de conectar un dispositivo externo.
 
-La siguiente función representa la adaptación prevista para utilizar el parlante integrado:
+Para realizar este cambio modificamos la función `sound_alert()` del código anterior, reemplazando la salida de sonido mediante el piezoeléctrico por el parlante integrado de la micro:bit.
+
+La siguiente función muestra la adaptación realizada:
 
 ```python
 def sound_alert():
@@ -135,15 +91,21 @@ def sound_alert():
 
 Esta versión mantiene la secuencia de tres sonidos utilizada anteriormente, pero aprovecha el parlante integrado de la micro:bit.
 
+El resto del programa se mantuvo sin cambios, conservando las funciones de detección, alerta visual y comunicación por radio.
+
+El código completo con esta adaptación se encuentra disponible en el siguiente enlace:
+
+[Ver código completo adaptado al parlante integrado](codigos_avance3/Alarma_PIR_Parlante_Integrado.py)
+
 Para adaptar el sistema de alarma utilizamos MakeCode, configurando las funciones de alerta visual y sonora de la micro:bit. Posteriormente, realizamos pruebas físicas para comprobar su funcionamiento.
 
 ![Programación del sistema de alarma en Microsoft MakeCode](imagenes/Prueba_programacion.jpeg)
 
 ### Dificultades durante las pruebas
 
-Después de realizar estas pruebas y revisar las conexiones entre las micro, las placas de expansión y los sensores PIR, no conseguimos obtener la respuesta esperada.
+Después de realizar estas pruebas y revisar las conexiones entre las micro:bit, las placas de expansión y los sensores PIR, no conseguimos obtener la respuesta esperada.
 
-El principal inconveniente fue que no pudimos confirmar que los sensores enviaran correctamente la señal de detección de movimiento a la micro. Esto impidió verificar el funcionamiento completo del sistema.
+El principal inconveniente fue que no pudimos confirmar que los sensores enviaran correctamente la señal de detección de movimiento a la micro:bit. Esto impidió verificar el funcionamiento completo del sistema.
 
 ### Pruebas individuales de los sensores PIR
 
@@ -177,8 +139,9 @@ Durante la jornada también trabajamos en la adaptación del código para utiliz
 
 Si bien no pudimos confirmar que los sensores estuvieran dañados, establecimos los próximos pasos para continuar con las pruebas utilizando nuevos componentes.
 
-El trabajo realizado nos permitió avanzar en la integración de los elementos físicos y la programación, acercándonos al objetivo de implementar un sistema capaz de detectar movimiento y activar una alarma mediante la micro:bit.
+En esta oportunidad no incorporamos videos de demostración, ya que no logramos obtener un funcionamiento que permitiera mostrar claramente la detección de movimiento y la activación de la alarma. Por este motivo, esperamos que en la próxima clase podamos realizar nuevas pruebas y registrar en video el funcionamiento del sistema.
 
+El trabajo realizado nos permitió avanzar en la integración de los elementos físicos y la programación, acercándonos al objetivo de implementar un sistema capaz de detectar movimiento y activar una alarma mediante la micro:bit.
 
 
 
