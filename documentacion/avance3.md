@@ -628,3 +628,64 @@ Logramos establecer la comunicación entre la ESP32 simulada en Wokwi y Python m
 Esta prueba nos permitió avanzar en el desarrollo de un mecanismo para enviar notificaciones externas cuando se detecte movimiento.
 
 Sin embargo, el envío de la notificación por correo electrónico quedó pendiente de completar, por lo que continuaremos trabajando en esta funcionalidad durante las próximas clases.
+
+
+
+## 29/10/2026 — Última prueba con sensor PIR y adaptación al sensor ultrasónico HC-SR04
+
+### Última prueba con el sensor PIR
+
+Durante esta clase realizamos una última prueba con el sensor PIR, utilizando un código proporcionado por el profesor para comprobar las lecturas del sensor y verificar si respondía correctamente.
+
+Para esta prueba decidimos realizar una conexión directa entre la micro:bit y el sensor PIR, sin utilizar la placa de expansión ni los cables macho-hembra que veníamos usando anteriormente. En su lugar, utilizamos cables con pinzas cocodrilo.
+
+Para facilitar la visualización de las conexiones, colocamos el sensor PIR al revés, dejando visibles los conectores y los cables utilizados durante la prueba.
+
+#### Conexiones realizadas
+
+| micro:bit | Sensor PIR | Color del cable |
+|---|---|---|
+| P0 | OUT (señal, pin central) | Negro |
+| 3V | VCC (+3V) | Verde |
+| GND | GND | Amarillo |
+
+Para mostrar con mayor claridad cómo realizamos las conexiones, elaboramos un diagrama y tomamos fotografías del montaje utilizado.
+
+#### Diagrama de conexiones
+
+El siguiente diagrama representa las conexiones realizadas entre la micro:bit y el sensor PIR, identificando los pines utilizados y los colores de los cables.
+
+![Diagrama de conexiones del sensor PIR](imagenes/Diagrama_PIR.png)
+
+#### Montaje de la última prueba
+
+En las siguientes fotografías se observa la conexión directa que realizamos entre la micro:bit y el sensor PIR utilizando pinzas cocodrilo, sin necesidad de la placa de expansión. Aunque las conexiones se pueden apreciar en las fotografías, el diagrama anterior permite identificar con mayor facilidad los pines utilizados y los colores de cada cable. Cabe aclarar que el sensor PIR se encuentra colocado al revés.
+
+![Última conexión realizada con el sensor PIR](imagenes/Ultima_conexion_PIR.png)
+
+#### Código utilizado en la prueba
+
+Para realizar esta última prueba utilizamos un código proporcionado por el profesor, desarrollado en Python para micro:bit.
+
+El programa permitía leer los valores del pin P0 y mostrarlos en la consola serial. También mostraba diferentes imágenes en la pantalla de la micro:bit según la lectura digital del sensor.
+
+El código utilizado se encuentra disponible en el siguiente enlace:
+
+[Ver código de la última prueba PIR](codigos_avance3/Prueba_PIR.py)
+
+#### Lecturas obtenidas
+
+Durante las pruebas observamos que inicialmente se mostraban valores de 0, incluso cuando no se registraban movimientos.
+
+Posteriormente, comenzaron a aparecer lecturas superiores a 700, principalmente alrededor de 768 y 769. Sin embargo, estos valores permanecían prácticamente constantes, sin presentar cambios claros al realizar movimientos frente al sensor.
+
+La siguiente fotografía muestra los valores obtenidos en la consola serial durante esta prueba.
+
+![Lecturas obtenidas del sensor PIR](imagenes/Lecturas_PIR.png)
+
+#### Conclusión de la prueba
+
+Esta fue la última prueba que realizamos con el sensor PIR. A pesar de modificar las conexiones y utilizar el código proporcionado por el profesor, no logramos obtener una respuesta confiable para detectar movimientos.
+
+Debido al tiempo dedicado a estas pruebas y a las dificultades encontradas, decidimos dejar de trabajar con el sensor PIR y continuar el desarrollo del proyecto utilizando un sensor ultrasónico de distancia HC-SR04.
+
