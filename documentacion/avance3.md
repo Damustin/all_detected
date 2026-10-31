@@ -775,6 +775,60 @@ Durante esta primera prueba logramos registrar mediciones utilizando el sensor u
 
 Si bien el funcionamiento todavía no era completamente estable, esta prueba fue importante para evaluar una alternativa al sensor PIR.
 
-Nuestro objetivo no es conocer la distancia exacta de un objeto, sino aprovechar las mediciones del sensor para identificar cambios que puedan indicar movimiento.
 
-De esta manera, buscamos adaptar el sensor ultrasónico al proyecto ALL DETECTED, para que en futuras pruebas pueda reconocer movimientos dentro de una zona determinada y activar una alerta, cumpliendo una función similar a la que originalmente habíamos pensado para el sensor PIR.
+
+### Adaptación del sensor ultrasónico al sistema de alertas
+
+Luego de comprobar que el sensor ultrasónico HC-SR04 respondía al acercar la mano, continuamos trabajando en la programación para adaptarlo al sistema de alertas de nuestro proyecto ALL DETECTED.
+
+Para esta segunda prueba tomamos como referencia el sistema que habíamos desarrollado anteriormente en Tinkercad, adaptando el código para utilizar el sensor ultrasónico en lugar del PIR.
+
+Nuestro objetivo fue aprovechar las mediciones de distancia para identificar la presencia de una persona u objeto y activar las alertas visuales y sonoras que habíamos trabajado en las clases anteriores.
+
+#### Funcionamiento de la segunda prueba
+
+Configuramos el programa para que, cuando el sensor registrara una distancia de 50 centímetros o menos, se activara una alerta en la micro:bit.
+
+Durante la prueba, el programa mostraba en la consola serial las distancias registradas por el sensor ultrasónico HC-SR04.
+
+Al acercar la mano y alcanzar la distancia configurada, la micro:bit mostraba el mensaje `ALERT` y reproducía tres tonos diferentes mediante su parlante integrado.
+
+El código también incluía una cara de enojo (`Image.ANGRY`) como alerta visual, aunque durante la demostración no llegaba a distinguirse claramente debido a la rapidez con la que aparecía en la pantalla.
+
+Además, incorporamos una condición para evitar que la alarma se repitiera constantemente. Una vez activada, el programa permitía una nueva alerta cuando la distancia superaba los 55 centímetros y posteriormente volvía a alcanzar el límite establecido.
+
+El código también contemplaba el envío de un mensaje por radio a una segunda micro:bit, aunque en esta prueba nos concentramos en comprobar las alertas visuales y sonoras.
+
+#### Código utilizado
+
+Para realizar esta segunda prueba adaptamos el código anterior, incorporando las funciones necesarias para activar las alertas a partir de las mediciones del sensor ultrasónico.
+
+El programa incluía la lectura de distancias, la visualización del mensaje `ALERT`, la reproducción de tres tonos y el control para evitar la repetición constante de la alarma.
+
+El código utilizado se encuentra disponible en el siguiente enlace:
+
+[Ver código de alerta con sensor HC-SR04](codigos_avance3/Alerta_HC-SR04.py)
+
+#### Video de demostración
+
+En el siguiente video se observa el funcionamiento del sistema de alertas utilizando el sensor ultrasónico HC-SR04.
+
+Durante la demostración acercamos la mano al sensor y observamos cómo el programa registraba las distancias en la consola serial.
+
+Al alcanzar la distancia configurada, la micro:bit mostraba el mensaje `ALERT` y reproducía los tres tonos programados.
+
+[Ver video de la segunda prueba con alertas](videos/Segunda_Prueba_Alerta_HC-SR04.mp4)
+
+#### Resultados obtenidos
+
+En esta segunda prueba logramos activar correctamente el mensaje `ALERT` y los tres tonos utilizando las mediciones del sensor ultrasónico HC-SR04.
+
+Esto representa un avance importante para ALL DETECTED, ya que recuperamos el funcionamiento del sistema de alertas desarrollado anteriormente y lo adaptamos al nuevo sensor.
+
+Nuestro objetivo no es conocer la distancia exacta de un objeto, sino aprovechar las mediciones del sensor para identificar la presencia de personas u objetos dentro de una zona determinada.
+
+De esta manera, el sensor ultrasónico comienza a cumplir la función que originalmente habíamos pensado para el PIR, permitiéndonos activar las alertas visuales y sonoras.
+
+A partir de estos resultados, continuamos con la integración del sistema completo, incorporando la comunicación entre las dos micro:bit y las alertas que muestran diferentes imágenes en pantalla.
+
+Esta siguiente etapa nos permite avanzar hacia la demostración del funcionamiento de ALL DETECTED utilizando las dos viviendas del proyecto.
