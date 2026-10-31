@@ -24,7 +24,6 @@ En esta sección se encuentran los informes de avance del proyecto ALL DETECTED,
 La documentación correspondiente al primer avance reúne el trabajo realizado durante las primeras clases, incluyendo los avances en el desarrollo, las pruebas realizadas y la evolución del código.
 
 - [Ver documentación del Avance 1](documentacion/avance1.md)
-- [Ver informe del primer avance en PDF](documentacion/PROYECTO%20STEAM%20-%20AGOSTO.pdf)
 
 ### Segundo avance
 
