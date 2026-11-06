@@ -114,7 +114,7 @@ El programa de la segunda micro:bit está destinado a recibir los mensajes envia
 
 ### Pruebas de funcionamiento
 
-*Pendiente: incorporar los resultados de las pruebas definitivas del sistema.*
+*Pendiente: realizar video del funcionamiento completo.*
 
 ---
 
