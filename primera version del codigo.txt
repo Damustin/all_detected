@@ -1,0 +1,51 @@
+# Imports go at the top
+from microbit import *
+import music
+import radio
+
+
+# Code in a 'while True:' loop repeats forever
+
+movimiento = False
+radio.on()
+radio.config(group=20, power=7)
+
+
+def change():
+    if pin0.is_touched():
+       global movimiento
+       movimiento = True
+
+def read_movimiento():
+    if movimiento:
+       screen_alert()
+       soun_alert()
+    
+def send_alert():
+    msj = "alert"
+    radio.send(msj)
+
+def received_alert():
+    msj = radio.receive()
+    if msj == "alert":
+        soun_alert()
+        screen_alert()
+    
+    
+    
+    
+    
+def screen_alert():
+    display.show(Image.ANGRY)
+    sleep(1000)
+    display.scroll('ALERT')
+
+def soun_alert():
+    music.play(['c5', 'c5', 'c5', 'g5', 'c5', 'c5', 'c5', 'g5'])
+     
+while True:
+      change()
+      read_movimiento()
+      send_alert()
+      sleep(2000)
+      

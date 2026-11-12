@@ -1,0 +1,51 @@
+radio.set_group(20)
+radio.set_transmit_power(7)
+
+PIR = DigitalPin.P0
+
+
+def screen_alert():
+    basic.show_icon(IconNames.ANGRY)
+    basic.show_string("ALERT", 50)
+    
+   
+
+
+def sound_alert():
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(784, music.beat(BeatFraction.QUARTER))
+
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(523, music.beat(BeatFraction.QUARTER))
+    music.play_tone(784, music.beat(BeatFraction.QUARTER))
+
+
+def send_alert():
+    radio.send_string("alert")
+
+
+def on_received_string(mensaje):
+    if mensaje == "alert":
+        sound_alert()
+        screen_alert()
+
+
+radio.on_received_string(on_received_string)
+
+def on_forever():
+    if pins.digital_read_pin(DigitalPin.P0) == 1:
+        screen_alert()
+        send_alert()
+        sound_alert()
+        for index in range(3):
+          pins.analog_pitch(440, 200)
+          basic.pause(100)
+    else:
+     
+      basic.show_string("NO")
+        
+
+basic.forever(on_forever)
