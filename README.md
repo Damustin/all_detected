@@ -12,7 +12,6 @@ Este proyecto se realiza durante el curso Laboratorio STEAM+, correspondiente a 
 
 - Rafael Nunes
 - Damian Marquez
-- Simón Burgues
 - Lucas Belen
 
 ## Documentación
